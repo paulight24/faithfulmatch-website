@@ -328,6 +328,26 @@ p.section-sub {
   color: var(--fm-ink-soft);
   padding: 10px;
 }
+.screenshot-shot {
+  margin: 0;
+  border: 1px solid var(--fm-border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+.screenshot-shot img {
+  width: 100%;
+  aspect-ratio: 9 / 18;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.screenshot-shot figcaption {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--fm-ink-soft);
+  padding: 8px 6px;
+}
 
 .testimonials-placeholder {
   text-align: center;
@@ -479,7 +499,7 @@ p.section-sub {
 @media (prefers-color-scheme: dark) {
   body { background: #201a29; color: #f1ecf7; }
   .site-header { background: rgba(32, 26, 41, 0.94); border-color: #392f47; }
-  .card, .store-badge, .testimonials-placeholder, .screenshot-placeholder, .page-hero-simple {
+  .card, .store-badge, .testimonials-placeholder, .screenshot-placeholder, .screenshot-shot, .page-hero-simple {
     background: #2a2335; border-color: #392f47;
   }
   .site-header, .card h3, .brand-logo, .page-hero-simple h1 { color: #f1ecf7; }
