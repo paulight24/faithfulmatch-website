@@ -22,15 +22,14 @@ This file lists everything on the site that is a placeholder, unconfirmed, or re
 ## Content placeholders on the live pages
 
 - **Testimonials section** (home page) — intentionally a placeholder ("coming soon"), per your instruction not to invent quotes. Replace once you have real, permission-cleared member testimonials.
-- **App screenshots** — all six screenshot slots on the home page are dashed-border placeholders with labels only. Need real device screenshots before launch (see "Missing assets" below).
-- **Hero mockup** — placeholder box with text, no real device mockup image yet.
+- **"Spiritual encouragement" screenshot slot** — still a dashed-border placeholder marked "Planned", since that feature isn't built yet. The other 5 slots (onboarding, discovery, profile details, match screen, messaging) now use real screenshots — see below.
 - **Store URLs** — `assets/js/config.js` has both set to `null`. Nothing links anywhere until you fill these in post-launch.
 
-## Missing brand/screenshot assets
+## Screenshot / hero assets (resolved)
 
-- No real phone-frame app screenshots exist yet for: onboarding, discovery, profile details, match screen, messaging. ("Spiritual encouragement" screenshot is correctly marked "Planned" since that feature isn't built.)
-- No hero/mockup composite image.
-- No feature-graphic-style banner image (useful for future OG image / social sharing card — currently OG image just points at the horizontal wordmark PNG as a placeholder).
+- `assets/images/hero-couple.jpg` and all 5 files in `assets/images/screenshots/` are **real captures**, not stock or mockup placeholders: the hero photo is `apps/mobile/src/assets/photos/welcome-hero.png` (already used on the app's own welcome screen); the 5 screenshots were captured live from the running app (headless Chrome via CDP, authenticated as the `david.wright@seed.fm` seed account) — onboarding/welcome, a real Discovery card (Emma, Chicago), the account's own Profile page, a Match profile view, and an actual Chat conversation (two messages were seeded via the API so the thread isn't empty).
+- Since these are dev-seed-data screenshots (not final production photos/copy), consider recapturing once real user profiles or production copy exist, particularly if seed profile photos/names shouldn't appear on the public marketing site long-term.
+- No feature-graphic-style banner image exists yet (useful for a future OG image / social sharing card — the OG image meta tag currently just points at the hero photo as a placeholder).
 - `wordmark-nocross-test.png` (the less-overtly-religious variant) exists in the brand folder but was not used anywhere on this site — the current design leans on a plain symbol mark, not the wordmark, in the header, so this wasn't needed. Worth a look if you want to A/B the more secular-leaning wordmark on the marketing site itself.
 
 ## Things this build deliberately did NOT do (by design, not oversight)
