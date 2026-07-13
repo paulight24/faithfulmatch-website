@@ -191,6 +191,17 @@ a:hover, a:focus { text-decoration: underline; }
   min-height: 360px;
   border: 1px solid var(--fm-border);
 }
+.hero-mockup--photo {
+  padding: 12px;
+  overflow: hidden;
+}
+.hero-mockup--photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 336px;
+  object-fit: cover;
+  border-radius: 20px;
+}
 .hero-mockup .placeholder-note {
   text-align: center;
   color: var(--fm-ink-soft);
