@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Your Email — FaithfulMatch</title>
+<meta name="description" content="Verify your FaithfulMatch account email address.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://empoweredforwealth.com/faithfulmatch/verify-email/">
+<link rel="icon" href="../assets/images/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css?v=2">
+<script src="../assets/js/config.js?v=2"></script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a href="../" class="brand-logo">
+      <img src="../assets/images/brand/symbol.svg" alt="" width="32" height="32">
+      FaithfulMatch
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="../#how-it-works">How It Works</a>
+      <a href="../#features">Features</a>
+      <a href="../#safety">Safety</a>
+      <a href="../#faq">FAQ</a>
+      <a href="../support/">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="legal-page">
+  <div class="container">
+    <h1>Verify Your Email</h1>
+
+    <div id="verify-loading">
+      <p>Verifying your email address…</p>
+    </div>
+
+    <div id="verify-success" class="callout" style="display:none;">
+      <p style="color:var(--fm-success);font-weight:600;margin:0 0 8px;">✓ Your email has been verified!</p>
+      <p id="verify-success-message" style="margin:0 0 16px;"></p>
+      <p style="margin:0;">You can now open the FaithfulMatch app and log in.</p>
+    </div>
+
+    <div id="verify-error" class="callout" style="display:none;">
+      <p style="color:#b3261e;font-weight:600;margin:0 0 8px;">We couldn't verify your email</p>
+      <p id="verify-error-message" style="margin:0 0 16px;"></p>
+      <p style="margin:0;">The link may have expired (links are valid for 24 hours) or already been used. Open the app and request a new verification email, or contact <a data-support-email href="mailto:faithfulmatch@empoweredforwealth.com">faithfulmatch@empoweredforwealth.com</a>.</p>
+    </div>
+
+    <div id="verify-missing-token" class="callout" style="display:none;">
+      <p style="color:#b3261e;font-weight:600;margin:0 0 8px;">Missing verification link</p>
+      <p style="margin:0;">This page needs a verification link from your email. Please open the link from the "Verify your FaithfulMatch.love account" email again, or request a new one from the app.</p>
+    </div>
+
+    <script>
+      (function () {
+        var loading = document.getElementById('verify-loading');
+        var success = document.getElementById('verify-success');
+        var error = document.getElementById('verify-error');
+        var missingToken = document.getElementById('verify-missing-token');
+
+        function show(el) {
+          loading.style.display = 'none';
+          success.style.display = 'none';
+          error.style.display = 'none';
+          missingToken.style.display = 'none';
+          el.style.display = 'block';
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+
+        if (!token) {
+          show(missingToken);
+          return;
+        }
+
+        var apiUrl = (window.FM_CONFIG && window.FM_CONFIG.apiUrl) || '';
+        fetch(apiUrl + '/auth/verify-email/' + encodeURIComponent(token), { method: 'GET' })
+          .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+          .then(function (result) {
+            if (result.ok) {
+              document.getElementById('verify-success-message').textContent =
+                (result.body && result.body.data && result.body.data.message) || 'Your account is now active.';
+              show(success);
+            } else {
+              document.getElementById('verify-error-message').textContent =
+                (result.body && result.body.message) || 'This verification link is invalid or has expired.';
+              show(error);
+            }
+          })
+          .catch(function () {
+            document.getElementById('verify-error-message').textContent = 'Network error. Please try again.';
+            show(error);
+          });
+      })();
+    </script>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 Excellent Vision Real Estate, LLC. FaithfulMatch is 18+.</span>
+      <span><a href="../privacy/">Privacy</a> · <a href="../">Home</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js?v=2"></script>
+</body>
+</html>
