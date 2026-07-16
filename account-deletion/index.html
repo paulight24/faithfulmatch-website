@@ -41,12 +41,72 @@
     <p>Follow the on-screen confirmation to complete the deletion. You do not need to reinstall the app to do this.</p>
 
     <h2>Option 2: Request deletion without the app</h2>
-    <p>If you no longer have the app installed, you can request deletion by emailing <a data-support-email href="mailto:faithfulmatch@empoweredforwealth.com">faithfulmatch@empoweredforwealth.com</a> from the email address associated with your account, with the subject line "Account Deletion Request." Please include:</p>
-    <ul>
-      <li>The email address on your FaithfulMatch account</li>
-      <li>The name on your profile</li>
-    </ul>
-    <p><strong>Do not include your password</strong> in your request — we will never ask for it. We may need to verify your identity through the email address on file before processing a deletion request submitted this way.</p>
+    <p>If you no longer have the app installed, enter the email address on your account below and we'll receive your request directly:</p>
+
+    <form id="deletion-request-form" class="callout" style="display:flex;flex-direction:column;gap:12px;max-width:420px;">
+      <label for="deletion-email" style="font-weight:600;">Email address on your account</label>
+      <input
+        type="email"
+        id="deletion-email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        style="padding:12px 14px;border-radius:10px;border:1px solid var(--fm-border);font-size:0.95rem;"
+      >
+      <button type="submit" class="btn btn-primary" id="deletion-submit-btn">Request Deletion</button>
+      <p id="deletion-form-message" role="status" style="margin:0;font-size:0.9rem;"></p>
+    </form>
+
+    <p>Prefer email? You can also reach us at <a data-support-email href="mailto:faithfulmatch@empoweredforwealth.com">faithfulmatch@empoweredforwealth.com</a> with the subject line "Account Deletion Request," including the email address and name on your profile.</p>
+    <p><strong>Do not include your password</strong> in any deletion request — we will never ask for it. We may need to verify your identity through the email address on file before processing a request.</p>
+
+    <script>
+      (function () {
+        var form = document.getElementById('deletion-request-form');
+        var btn = document.getElementById('deletion-submit-btn');
+        var msg = document.getElementById('deletion-form-message');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = document.getElementById('deletion-email').value.trim();
+          if (!email) return;
+
+          btn.disabled = true;
+          btn.textContent = 'Submitting…';
+          msg.textContent = '';
+          msg.style.color = '';
+
+          var apiUrl = (window.FM_CONFIG && window.FM_CONFIG.apiUrl) || '';
+          fetch(apiUrl + '/auth/deletion-requests', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email }),
+          })
+            .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+            .then(function (result) {
+              if (result.ok) {
+                form.querySelector('input').setAttribute('disabled', 'true');
+                btn.style.display = 'none';
+                msg.style.color = 'var(--fm-success)';
+                msg.textContent = (result.body && result.body.data && result.body.data.message)
+                  || "If an account with that email exists, we've received your request.";
+              } else {
+                btn.disabled = false;
+                btn.textContent = 'Request Deletion';
+                msg.style.color = '#b3261e';
+                msg.textContent = 'Something went wrong. Please try again or email us directly.';
+              }
+            })
+            .catch(function () {
+              btn.disabled = false;
+              btn.textContent = 'Request Deletion';
+              msg.style.color = '#b3261e';
+              msg.textContent = 'Network error. Please try again or email us directly.';
+            });
+        });
+      })();
+    </script>
 
     <h2>What gets deleted</h2>
     <p>When your account is deleted, your profile, photos, messages, likes/matches, and preference data are removed or anonymized so they are no longer associated with an active, identifiable account.</p>
@@ -62,7 +122,7 @@
     </ul>
 
     <h2>Processing time</h2>
-    <p><span class="placeholder-tag">The estimated processing period has not yet been confirmed by the business and will be added here before publishing.</span></p>
+    <p>We process deletion requests within <strong>30 days</strong>. You'll receive a confirmation email once your account and data have been deleted.</p>
 
     <h2>Questions</h2>
     <p>Contact <a data-support-email href="mailto:faithfulmatch@empoweredforwealth.com">faithfulmatch@empoweredforwealth.com</a> with any questions about account deletion, or visit our <a href="../support/">Support page</a>.</p>
