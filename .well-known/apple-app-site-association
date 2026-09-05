@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "REPLACE_TEAM_ID.love.faithfulmatch.app",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
