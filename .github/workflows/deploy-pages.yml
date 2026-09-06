@@ -1,9 +1,12 @@
 name: Deploy static site to GitHub Pages
 
-# Manual trigger only — pushing to main will NOT auto-publish.
-# Run this from the Actions tab ("Run workflow") only once the site
-# has been reviewed and approved for launch.
+# Deploys on every push to main, plus a manual trigger from the Actions tab.
+# The site is public legal/marketing content (privacy, terms, account
+# deletion) that both app stores fetch, so it must track main automatically -
+# a stale privacy URL is a store-review failure.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
