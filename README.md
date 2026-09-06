@@ -22,7 +22,7 @@ None needed — this is already static, deployable as-is.
 
 This site is currently deployed at `https://faithfulmatch.love/` — uploaded directly into `public_html/faithfulmatch/` on Hostinger, **not** GitHub Pages. All internal links use **relative paths with no leading slash** (e.g. `privacy/`, not `/privacy/`) specifically so the same file set works unmodified from a subdirectory, from a domain root, or from GitHub Pages — no path rewriting needed when you move it later.
 
-Canonical URLs and Open Graph tags in every page currently point at `https://faithfulmatch.love/` to match this temporary host. Search for `empoweredforwealth.com/faithfulmatch/` across all `index.html` files when it's time to swap to the real domain (see below).
+Canonical URLs and Open Graph tags in every page point at `https://faithfulmatch.love/`, the real domain. The site previously lived in the `empoweredforwealth.com/faithfulmatch/` subdirectory; that swap is done. Internal links remain relative with no leading slash, so the same file set still works from a subdirectory, a domain root, or GitHub Pages.
 
 ## GitHub Pages setup (alternative / not currently used)
 

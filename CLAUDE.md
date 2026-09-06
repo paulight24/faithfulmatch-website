@@ -39,7 +39,8 @@ faithfulmatch-website/
 
 - **Current**: GitHub Pages (manual trigger via GitHub Actions)
   - Workflow: `.github/workflows/deploy-pages.yml` (workflow_dispatch)
-- **Current URL**: empoweredforwealth.com/faithfulmatch/ (temporary)
+- **Current URL**: faithfulmatch.love (own domain, Hostinger; DNS live since 2026-09-06)
+- **Previous URL**: empoweredforwealth.com/faithfulmatch/ (temporary subdirectory, now superseded)
 - **Planned domain**: faithfulmatch.love
 
 ## Development
