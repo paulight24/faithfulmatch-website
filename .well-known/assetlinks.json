@@ -1,11 +1,14 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "love.faithfulmatch.app",
       "sha256_cert_fingerprints": [
-        "DF:71:F0:0F:74:46:18:24:45:36:3D:34:E2:F3:3D:2D:7F:12:6C:CD:E0:4D:C4:2D:D3:DF:7D:D4:F9:E7:4A:47"
+        "DF:71:F0:0F:74:46:18:24:45:36:3D:34:E2:F3:3D:2D:7F:12:6C:CD:E0:4D:C4:2D:D3:DF:7D:D4:F9:E7:4A:47",
+        "DD:80:84:49:2A:0F:F5:FF:60:D9:0B:C8:B7:D3:4E:F4:51:6F:17:92:97:25:85:51:98:E6:47:6E:41:B8:F4:6A"
       ]
     }
   }
