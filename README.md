@@ -60,3 +60,34 @@ assets/images/brand/           Copied from apps/mobile/src/assets/brand/
 ```
 
 See `REVIEW-NOTES.md` for legal/technical items that must be confirmed before this site is published or submitted to app stores.
+
+## Deployment (as of 2026-09-06)
+
+Auto-deploys to **GitHub Pages on every push to `main`** (`.github/workflows/deploy-pages.yml`).
+Repo is public so Pages is free; history was scanned for secrets before flipping visibility.
+Custom domain `faithfulmatch.love` is configured on the Pages site.
+
+**Remaining step — DNS, in the Hostinger account that owns the domain.** The domain currently
+points at Hostinger's parking IP (`2.57.91.91`), so every path returns 200 serving a
+*"Parked Domain"* page. Replace the A records with GitHub Pages':
+
+```
+A    @      185.199.108.153
+A    @      185.199.109.153
+A    @      185.199.110.153
+A    @      185.199.111.153
+CNAME www   paulight24.github.io
+```
+
+**Leave the MX records alone** — `mx1/mx2.hostinger.com` serve info@ and support@faithfulmatch.love
+and are unaffected by changing A records.
+
+Then enable "Enforce HTTPS" in the repo's Pages settings once GitHub issues the certificate
+(usually minutes after DNS propagates), and verify:
+
+```bash
+curl -s https://faithfulmatch.love/privacy/ | grep -o "<title>[^<]*</title>"   # must NOT say "Parked Domain"
+curl -s https://faithfulmatch.love/.well-known/assetlinks.json | head -c 40    # must be JSON
+```
+
+Only after that should the Play Console privacy-policy and account-deletion URLs be repointed here.
